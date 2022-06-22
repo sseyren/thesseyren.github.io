@@ -1,0 +1,33 @@
+base_url = "https://thesseyren.github.io"
+title = "thesseyren"
+description = "thesseyren personal page"
+
+theme = "terminimal"
+compile_sass = true
+
+generate_feed = true
+feed_filename = "atom.xml"
+
+taxonomies = [
+    {name = "tags"},
+]
+
+build_search_index = false
+highlight_theme = "base16-ocean-dark"
+
+[markdown]
+highlight_code = true
+
+[extra]
+accent_color = "orange"
+background_color = "dark"
+logo_text = "thesseyren"
+copyright_html = "."
+
+menu_items = [
+    {name = "/", url = "$BASE_URL"},
+    {name = "blog", url = "$BASE_URL/blog"},
+    {name = "about me", url = "$BASE_URL/about"},
+    {name = "projects", url = "$BASE_URL/projects"},
+    {name = "tags", url = "$BASE_URL/tags"},
+]
