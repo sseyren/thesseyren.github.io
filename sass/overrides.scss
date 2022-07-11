@@ -1,3 +1,9 @@
 .container {
   max-width: 1088px;
 }
+
+.footer {
+  &__inner {
+    width: auto;
+  }
+}
