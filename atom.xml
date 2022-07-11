@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>thesseyren</title>
+	<subtitle>thesseyren personal page</subtitle>
+	<link href="https://thesseyren.github.io/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://thesseyren.github.io"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-06-23T00:00:00+00:00</updated>
+	<id>https://thesseyren.github.io/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Fixing Screen Tearing Issue for Nvidia Drivers on Ubuntu 20.04</title>
+		<published>2022-06-23T00:00:00+00:00</published>
+		<updated>2022-06-23T00:00:00+00:00</updated>
+		<link href="https://thesseyren.github.io/blog/ubuntu-nvidia-screen-tearing/" type="text/html"/>
+		<id>https://thesseyren.github.io/blog/ubuntu-nvidia-screen-tearing/</id>
+		<content type="html">&lt;p&gt;You may encounter some problems with proprietary nvidia drivers if you have a graphic card that comes with &lt;a href=&quot;https:&#x2F;&#x2F;www.nvidia.com&#x2F;en-us&#x2F;geforce&#x2F;technologies&#x2F;optimus&#x2F;technology&#x2F;&quot;&gt;nvidia optimus technology&lt;&#x2F;a&gt;. For my case&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;, it was screen tearing issue.&lt;&#x2F;p&gt;
+&lt;p&gt;To fix this issue, we need to open &lt;code&gt;&#x2F;lib&#x2F;modprobe.d&#x2F;nvidia-kms.conf&lt;&#x2F;code&gt; and append this line to that file:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;options nvidia-drm modeset=1 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Don&#x27;t forget to reboot your system.&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;em&gt;NVIDIA Corporation GP108M [GeForce MX150] [10de:1d10] (rev a1)&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>MiKTeX Installation Notes</title>
+		<published>2022-06-22T00:00:00+00:00</published>
+		<updated>2022-06-22T00:00:00+00:00</updated>
+		<link href="https://thesseyren.github.io/blog/miktex-installation-notes/" type="text/html"/>
+		<id>https://thesseyren.github.io/blog/miktex-installation-notes/</id>
+		<content type="html">&lt;p&gt;I&#x27;m just tired of updating my &lt;a href=&quot;https:&#x2F;&#x2F;www.tug.org&#x2F;texlive&#x2F;&quot;&gt;TeX Live&lt;&#x2F;a&gt; installation every year. Never managed to update successfully in my life. I rarely use LaTeX. I could use an online service for compiling PDF files but I like to do things in my computer, not in someone else&#x27;s.&lt;&#x2F;p&gt;
+&lt;p&gt;For fixing this problem, &lt;a href=&quot;https:&#x2F;&#x2F;miktex.org&#x2F;&quot;&gt;MiKTeX&lt;&#x2F;a&gt; looks promising. I think it&#x27;s like a rolling release type of distribution, which is easier to manage and update packages. Also, it has a much more pretty looking management tool.&lt;&#x2F;p&gt;
+&lt;p&gt;In this blog post I wanted to cover some tips and tricks about MiKTeX installation.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;installing-every-miktex-package&quot;&gt;Installing Every MiKTeX Package&lt;&#x2F;h1&gt;
+&lt;p&gt;One of the downsides about MiKTeX is, I never managed to have meaningfull error messages. Ok, I can guess there is a package missing in my setup, but &lt;em&gt;which one&lt;&#x2F;em&gt;?.. Because of that, I wanted to install every package available.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;mpm&lt;&#x2F;code&gt; is the package manager of MiKTeX. Don&#x27;t use &lt;code&gt;--install&lt;&#x2F;code&gt; option for installing packages because it returns error messages for already installed packages. Instead, use &lt;code&gt;--require&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;If your installation is not system-wide, don&#x27;t use &lt;code&gt;--admin&lt;&#x2F;code&gt; option. (also don&#x27;t use &lt;code&gt;sudo&lt;&#x2F;code&gt;)&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span&gt; mpm&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --verbose --admin --require &lt;&#x2F;span&gt;&lt;span&gt;$(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mpm --list-package-names &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;paste -sd &lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; -)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This installs every package, including documentation and source packages. If you don&#x27;t want to install doc and source packages, you can use the following command:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span&gt; mpm&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --verbose --admin --require &lt;&#x2F;span&gt;&lt;span&gt;$(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mpm --list-package-names &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;grep -v&lt;&#x2F;span&gt;&lt;span&gt; __ | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;paste -sd &lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; -)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;em&gt;If a package name contains double underscore (__) it&#x27;s probably a documentation or a source package. We can use &lt;code&gt;grep -v&lt;&#x2F;code&gt; to skip them. For example: &lt;a href=&quot;https:&#x2F;&#x2F;miktex.org&#x2F;packages&#x2F;aalok&quot;&gt;&lt;code&gt;aalok&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;miktex.org&#x2F;packages&#x2F;aalok__doc&quot;&gt;&lt;code&gt;aalok__doc&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;miktex.org&#x2F;packages&#x2F;aalok__source&quot;&gt;&lt;code&gt;aalok__source&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;After these, you may need to rebuild &lt;a href=&quot;https:&#x2F;&#x2F;docs.miktex.org&#x2F;manual&#x2F;advanced.html#psfonts&quot;&gt;font map files&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span&gt; miktex&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --verbose --admin&lt;&#x2F;span&gt;&lt;span&gt; fontmaps configure
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+</feed>

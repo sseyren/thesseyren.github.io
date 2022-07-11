@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>thesseyren</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://thesseyren.github.io/style.css">
+    <link rel="stylesheet" href="https://thesseyren.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://thesseyren.github.io/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://thesseyren.github.io/font-hack-subset.css">
+
+<link rel="stylesheet" href="https://thesseyren.github.io/overrides.css">
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://thesseyren.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            thesseyren
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://thesseyren.github.io">/</a></li>
+            
+                <li class="active"><a href="https://thesseyren.github.io/blog">blog</a></li>
+            
+                <li><a href="https://thesseyren.github.io/about">about me</a></li>
+            
+                <li><a href="https://thesseyren.github.io/projects">projects</a></li>
+            
+                <li><a href="https://thesseyren.github.io/tags">tags</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+        <div class="posts">
+                <div class="post on-list">
+                    
+    <h1 class="post-title"><a href="https://thesseyren.github.io/blog/ubuntu-nvidia-screen-tearing/">Fixing Screen Tearing Issue for Nvidia Drivers on Ubuntu 20.04</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2022-06-23
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://thesseyren.github.io/tags/ubuntu/">#ubuntu</a>&nbsp;
+                <a class="post-tag" href="https://thesseyren.github.io/tags/drivers/">#drivers</a>&nbsp;
+                <a class="post-tag" href="https://thesseyren.github.io/tags/nvidia/">#nvidia</a></span>
+    
+
+                    
+        <div class="post-content">
+            <p>You may encounter some problems with proprietary nvidia drivers if you have a graphic card that comes with <a href="https://www.nvidia.com/en-us/geforce/technologies/optimus/technology/">nvidia optimus technology</a>. For my case<sup class="footnote-reference"><a href="#1">1</a></sup>, it was screen tearing issue.</p>
+<p>To fix this issue, we need to open <code>/lib/modprobe.d/nvidia-kms.conf</code> and append this line to that file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>options nvidia-drm modeset=1 
+</span></code></pre>
+<p>Don't forget to reboot your system.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><em>NVIDIA Corporation GP108M [GeForce MX150] [10de:1d10] (rev a1)</em></p>
+</div>
+
+        </div>
+
+                </div>
+            
+                <div class="post on-list">
+                    
+    <h1 class="post-title"><a href="https://thesseyren.github.io/blog/miktex-installation-notes/">MiKTeX Installation Notes</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2022-06-22
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://thesseyren.github.io/tags/tex/">#TeX</a></span>
+    
+
+                    
+        <div class="post-content">
+            <p>I'm just tired of updating my <a href="https://www.tug.org/texlive/">TeX Live</a> installation every year. Never managed to update successfully in my life. I rarely use LaTeX. I could use an online service for compiling PDF files but I like to do things in my computer, not in someone else's.</p>
+<p>For fixing this problem, <a href="https://miktex.org/">MiKTeX</a> looks promising. I think it's like a rolling release type of distribution, which is easier to manage and update packages. Also, it has a much more pretty looking management tool.</p>
+<p>In this blog post I wanted to cover some tips and tricks about MiKTeX installation.</p>
+<h1 id="installing-every-miktex-package">Installing Every MiKTeX Package</h1>
+<p>One of the downsides about MiKTeX is, I never managed to have meaningfull error messages. Ok, I can guess there is a package missing in my setup, but <em>which one</em>?.. Because of that, I wanted to install every package available.</p>
+<p><code>mpm</code> is the package manager of MiKTeX. Don't use <code>--install</code> option for installing packages because it returns error messages for already installed packages. Instead, use <code>--require</code>.</p>
+<p><strong>If your installation is not system-wide, don't use <code>--admin</code> option. (also don't use <code>sudo</code>)</strong></p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> mpm</span><span style="color:#bf616a;"> --verbose --admin --require </span><span>$(</span><span style="color:#bf616a;">mpm --list-package-names </span><span>| </span><span style="color:#bf616a;">paste -sd </span><span>&#39;</span><span style="color:#a3be8c;">,</span><span>&#39; -)
+</span></code></pre>
+<p>This installs every package, including documentation and source packages. If you don't want to install doc and source packages, you can use the following command:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> mpm</span><span style="color:#bf616a;"> --verbose --admin --require </span><span>$(</span><span style="color:#bf616a;">mpm --list-package-names </span><span>| </span><span style="color:#bf616a;">grep -v</span><span> __ | </span><span style="color:#bf616a;">paste -sd </span><span>&#39;</span><span style="color:#a3be8c;">,</span><span>&#39; -)
+</span></code></pre>
+<p><em>If a package name contains double underscore (__) it's probably a documentation or a source package. We can use <code>grep -v</code> to skip them. For example: <a href="https://miktex.org/packages/aalok"><code>aalok</code></a>, <a href="https://miktex.org/packages/aalok__doc"><code>aalok__doc</code></a>, <a href="https://miktex.org/packages/aalok__source"><code>aalok__source</code></a></em></p>
+<p>After these, you may need to rebuild <a href="https://docs.miktex.org/manual/advanced.html#psfonts">font map files</a>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> miktex</span><span style="color:#bf616a;"> --verbose --admin</span><span> fontmaps configure
+</span></code></pre>
+
+        </div>
+
+                </div>
+            <div class="pagination">
+                <div class="pagination__buttons"></div>
+            </div>
+        </div>
+        
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">.</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>
